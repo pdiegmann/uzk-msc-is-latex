@@ -1,0 +1,41 @@
+\usepackage[
+    backend=biber,
+    bibstyle=authortitle,
+    citestyle=authoryear,
+    sortlocale=de_DE,
+    uniquename=false,
+    uniquelist=false,
+    isbn=false,
+    url=true, 
+    doi=false,
+    autocite=footnote,
+    maxcitenames=2,
+    mincitenames=1,
+    maxbibnames=30,
+    eprint=false,
+    hyperref
+]{biblatex}
+
+%% CHANGE LIBRARY FILE HERE
+\addbibresource{example.bib}
+
+\let\cite\textcite
+
+\renewbibmacro*{cite}{%
+  %\global\boolfalse{cbx:loccit}%
+  \iffieldundef{shorthand}
+    {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+       {\usebibmacro{cite:ibid}}
+       {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+          {\usebibmacro{cite:label}%
+           \setunit{\addspace}}
+          {\printnames{labelname}%
+           \setunit{\nameyeardelim}}%
+        \iffieldundef{labelyear}
+          {}
+          {\printtext[parens]{\usebibmacro{cite:labelyear+extrayear}}}}}
+    {\usebibmacro{cite:shorthand}}}
+
+\renewcommand{\bibfootnotewrapper}[1]{\bibsentence#1}
+
+\renewcommand*{\multicitedelim}{\addcomma\space}

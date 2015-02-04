@@ -1,0 +1,40 @@
+\usepackage{times}            
+\usepackage{newclude}
+\usepackage[ampersand]{easylist}
+\usepackage{tabularx}
+\usepackage{footnote}
+\usepackage{csquotes}
+\usepackage{nicefrac}
+\usepackage{caption}
+\usepackage{chngcntr}
+
+\newcommand{\todo}[1]{\textbf{\textsc{\textcolor{Red}{TODO: #1}}}}
+\newcommand{\TODO}[1]{\todo{#1}}
+\newcommand{\note}[1]{\textbf{\textsc{\textcolor{Cyan}{NOTE: #1}}}}
+\newcommand{\NOTE}[1]{\note{#1}}
+
+%% GRAPHICS
+\usepackage[pdftex]{graphicx}
+\graphicspath{{figures}}
+\usepackage{rotating}
+\counterwithin{figure}{section}
+\usepackage[absolute,overlay]{textpos}
+
+%% TABLES
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{setspace}
+\counterwithin{table}{section}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{float}
+\restylefloat{table}
+\usepackage{enumitem}
+\usepackage{changepage}
+\usepackage{pdflscape}
+\setenumerate{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
+
+\usepackage[]{hyperref}
+\hypersetup{colorlinks=false}
+
+\usepackage[T1]{fontenc}      % umlauts

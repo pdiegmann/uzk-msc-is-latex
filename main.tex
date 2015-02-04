@@ -1,0 +1,84 @@
+%% ---------
+%% MAIN CONFIGURATION
+%% ---------
+\include{includes/__prefix}
+
+%% ---------
+%% ADDITIONAL CONFIGURATION IF NEEDED BELOW HERE
+%% ---------
+
+% Kurzwahlen Directions
+\newcommand{\OR}{OR }
+\newcommand{\ORs}{ORs }
+% ns = no space
+\newcommand{\ORns}{OR}
+\newcommand{\ORsns}{ORs}
+
+\begin{document}
+
+%% ROMAN PAGE NUMBERING (Table of Contents etc.)
+\pagenumbering{Roman}
+
+% ---------
+% COVER
+% ---------
+\include{titlepages/cover_seminar}
+%\include{titlepages/cover}
+
+% ------------------
+% TABLE OF CONTENTS
+% ------------------
+\tocloftpagestyle{scrheadings}
+\tableofcontents
+\newpage
+
+% ---------------------
+% INDEX OF ACRONYMS
+% ---------------------
+%\include{titlepages/acronyms}
+
+% -------------------
+% INDEX OF TABLES
+% -------------------
+\listoftables
+\addcontentsline{toc}{section}{Index of Tables}
+\newpage
+
+% -------------------
+% INDEX OF ILLUSTRATIONS
+% -------------------
+\listoffigures
+\addcontentsline{toc}{section}{Index of Illustrations}
+\newpage
+
+%% RESET SIZE AND STRETCH
+\normalsize
+\setstretch{1,5}
+
+%% ARABIC PAGE NUMBERING (main content)
+\pagenumbering{arabic}
+
+% --------------
+% MAIN CONTENT
+% --------------
+\include{chapters/1-introduction}
+
+\renewcommand{\arraystretch}{1.0}
+
+% --------------------
+% BIBLIOGRAPHY
+% --------------------
+
+\newpage
+\patchcmd{\bibsetup}{\interlinepenalty=5000}{\interlinepenalty=10000}{}{}
+\addcontentsline{toc}{section}{Bibliography}
+\printbibliography[title={Bibliography}]
+
+
+% ---------
+% APPENDIX
+% ---------
+\newpage
+\include{titlepages/statement-of-authorship}
+
+\end{document}

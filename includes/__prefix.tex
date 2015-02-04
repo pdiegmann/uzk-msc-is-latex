@@ -1,0 +1,35 @@
+\documentclass[
+    pdftex,
+	a4paper,
+	oneside,
+	12pt,
+	liststotocnumbered
+]{article}
+
+%% META-DATA FOR PDF
+\PassOptionsToPackage{hyphens}{url}\usepackage[
+	pdftitle={}, % Document-Title
+	pdfsubject={}, % Subject
+	pdfauthor={}, % Author(s)
+	pdfkeywords={}, % Keywords
+	colorlinks=false,
+	breaklinks=true
+]{hyperref}
+
+%% LANGUAGE SELECTION
+\usepackage[USenglish,american,english]{babel}    % english 
+%\selectlanguage{american}       % english
+
+%% LANGUAGE SPECIFIC COMMANDS
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\listtablename}{Index of Tables}
+\renewcommand{\listfigurename}{Index of Illustrations}
+
+%% MORE INTERNAL CONFIGURATION
+\usepackage[utf8]{inputenc}
+
+\input{includes/__general}
+\input{includes/__styles}
+\input{includes/__bibliography}
+
+\interfootnotelinepenalty=10000

@@ -1,0 +1,110 @@
+%% PAGE BORDERS
+\usepackage[
+    top=2.5cm, 
+    bottom=2.5cm, 
+    left=5cm, 
+    right=1cm
+]{geometry} 
+
+%% LINEHEIGHT
+\renewcommand{\arraystretch}{1.5}
+
+% PAGE NUMBERING ON TOP
+\usepackage{scrpage2} 
+\usepackage[dvipsnames,usenames]{color}
+\clearscrheadfoot 
+\chead[\pagemark]{\textcolor[gray]{0.5}{\pagemark}} 
+\pagestyle{scrheadings}
+
+\setlength{\parindent}{0in}
+
+% TITLE FONTS
+\usepackage{titlesec}
+\titleformat{\section}{\bfseries}{\thesection.}{12pt}{}
+\titleformat{\subsection}{\bfseries}{\thesubsection }{12pt}{}
+
+% FOOTNOTES
+% multiple
+\usepackage[hang,flushmargin]{footmisc}    
+\renewcommand*{\footnotelayout}{\footnotesize} % size of text
+\renewcommand{\footnotemargin}{2.2em}          % margin between text and number
+\setlength{\footnotesep}{1.3em}                % space between footnotes
+\setlength{\skip\footins}{2.5em}               % space between text & footnotes
+\usepackage{savefnmark}
+
+\newlength{\arrayrulewidthOriginal}
+\newcommand{\Cline}[2]{%
+  \noalign{\global\setlength{\arrayrulewidthOriginal}{\arrayrulewidth}}%
+  \noalign{\global\setlength{\arrayrulewidth}{#1}}\cline{#2}%
+  \noalign{\global\setlength{\arrayrulewidth}{\arrayrulewidthOriginal}}}
+
+% CONCAT MULTIPLE WITH COMMA
+\let\oldFootnote\footnote
+\newcommand\nextToken\relax
+
+\renewcommand\footnote[1]{%
+    \oldFootnote{#1}\futurelet\nextToken\isFootnote}
+
+\newcommand\isFootnote{%
+    \ifx\footnote\nextToken\textsuperscript{, }\fi}
+    
+% SHORTHANDS
+%[printonlyused]
+\usepackage{acronym}
+\renewcommand{\bflabel}[1]{{#1\hfill}}
+
+% superscript comma and space
+\newcommand{\mulcit}{\textsuperscript{, }}
+
+% paragraph with new line
+\newcommand{\heading}[1]{\paragraph*{#1}\mbox{}\\}
+
+% TOC, LOF, FIG Styles
+\renewcommand{\figurename}{}
+\renewcommand{\tablename}{}
+\captionsetup[table]{name=}
+\captionsetup[figure]{name=}
+\renewcommand\thefigure{Fig. \arabic{section}-\arabic{figure}}
+\renewcommand\thetable{Tab. \arabic{section}-\arabic{table}}
+
+\usepackage{needspace}
+\usepackage{tocloft, titletoc}  
+\setlength{\cftaftertoctitleskip}{0em}
+\renewcommand{\cftloftitlefont}{\bfseries}
+%\renewcommand{\cftfigfont}{\bfseries}
+\renewcommand{\cfttoctitlefont}{\bfseries}
+\renewcommand{\cftlottitlefont}{\bfseries}
+\titlecontents{section}     % set formatting for \section 
+[2.3em]                     % adjust left margin
+{\vspace{0.5em}}            % font formatting
+{\hspace{-1.8em}.\contentslabel{0.7em}\hspace{1em}} % sec label and offset
+{\hspace*{-2.3em}}
+{\titlerule*[1mm]{.}\contentspage}
+
+\titlecontents{subsection}  % set formatting for \subsection 
+[3em]                       % adjust left margin
+{\vspace{0.5em}}            % font formatting
+{\contentslabel{2.3em}}     % sec label and offset
+{\hspace*{-2.3em}}
+{\titlerule*[1mm]{.}\contentspage}
+
+\titlecontents{subsubsection}  % set formatting for \subsubsection 
+[4.2em]                       % adjust left margin
+{\vspace{0.5em}}            % font formatting
+{\contentslabel{2.3em}}     % sec label and offset
+{\hspace*{-2.3em}}
+{\titlerule*[1mm]{.}\contentspage}
+
+\titlecontents{figure}      % set formatting for \subsection 
+[3.4em]                     % adjust left margin
+{\vspace{0.5em}}            % font formatting
+{:\hspace*{0.9em}\contentslabel{4.5em}}     % sec label and offset
+{\hspace*{-2.3em}}
+{\titlerule*[1mm]{.}\contentspage}
+
+\titlecontents{table}       % set formatting for \subsection 
+[3.4em]                     % adjust left margin
+{\vspace{0.5em}}            % font formatting
+{:\hspace*{0.9em}\contentslabel{4.5em}}     % sec label and offset
+{\hspace*{-2.3em}}
+{\titlerule*[1mm]{.}\contentspage}
