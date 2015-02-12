@@ -32,4 +32,10 @@
 \input{includes/__styles}
 \input{includes/__bibliography}
 
+\makeatletter%
+\long\def\@makefntext#1{%
+  \parindent 1em\noindent \hb@xt@ 1.8em{\hss\@makefnmark}#1%
+  \ifnum\the\spacefactor<3000.\fi}
+\makeatother
+
 \interfootnotelinepenalty=10000
