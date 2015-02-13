@@ -6,6 +6,24 @@
 	liststotocnumbered
 ]{article}
 
+\usepackage{ifthen}
+\newboolean{isWrittenInEnglish}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% LANGUAGE SELECTION /// SPRACHWAHL %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%
+%% true  = English %%
+%% false = Deutsch %%			 
+%%%%%%%%%%%%%%%%%%%%%			
+							 % {false}
+\setboolean{isWrittenInEnglish}{true}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %% META-DATA FOR PDF
 \PassOptionsToPackage{hyphens}{url}\usepackage[
 	pdftitle={}, % Document-Title
@@ -16,14 +34,23 @@
 	breaklinks=true
 ]{hyperref}
 
-%% LANGUAGE SELECTION
-\usepackage[USenglish,american,english]{babel}    % english 
-%\selectlanguage{american}       % english
+%% LANGUAGE 
+\ifthenelse{\boolean{isWrittenInEnglish}}{
+	\usepackage[USenglish,american,english]{babel}    % english 
 
-%% LANGUAGE SPECIFIC COMMANDS
-\renewcommand{\contentsname}{Table of Contents}
-\renewcommand{\listtablename}{Index of Tables}
-\renewcommand{\listfigurename}{Index of Illustrations}
+	%% LANGUAGE SPECIFIC COMMANDS
+	\renewcommand{\contentsname}{Table of Contents}
+	\renewcommand{\listtablename}{Index of Tables}
+	\renewcommand{\listfigurename}{Index of Illustrations}
+}
+{
+	\usepackage[german]{babel}    % english 
+
+	%% LANGUAGE SPECIFIC COMMANDS
+	\renewcommand{\contentsname}{Inhaltsverzeichnis}
+	\renewcommand{\listtablename}{Tabellenverzeichnis}
+	\renewcommand{\listfigurename}{Illustrationsverzeichnis}
+}
 
 %% MORE INTERNAL CONFIGURATION
 \usepackage[utf8]{inputenc}

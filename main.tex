@@ -1,13 +1,49 @@
 %% ---------
 %% MAIN CONFIGURATION
 %% ---------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%       IMPORTANT INFORMATION       %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%												  %
+% To change the document's language, please see   %
+% __prefix.tex, right at the top. Just set the    %
+% boolean variable to true for English documents  %
+% or false for German documents.					  %
+%												  %
+% You can also edit the meta-data of the final 	  %
+% PDF in __prefix.tex, still quite at the top.    %
+%												  %
+% To use convenient shorthands, e.g. \O instead   %
+% of typing organization, just use the examples   %
+% a few lines lower. ATTENTION: LaTeX does not    %
+% take care of spaces, so you might want to use a %
+% \Ons without a space at the word's end as well. %
+%												  %
+% To use a different cover, we appended both      %
+% Seminar and Hauptseminar- / Master-Thesis-      %
+% styles.										  %
+%												  %
+% If you would like to report any needed changes, %
+% bugs or ideas, have a look at:					  %
+% https://github.com/pdiegmann/uzk-msc-is-latex   %
+%												  %
+%												  %
+%                   GOOD LUCK!                    %
+%												  %
+%												  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \include{includes/__prefix}
 
 %% ---------
 %% ADDITIONAL CONFIGURATION IF NEEDED BELOW HERE
 %% ---------
 
-% Kurzwahlen Directions
+% Shorthands
 \newcommand{\OR}{OR }
 \newcommand{\ORs}{ORs }
 % ns = no space
@@ -35,7 +71,7 @@
 % ---------------------
 % INDEX OF ACRONYMS
 % ---------------------
-%\include{titlepages/acronyms}
+\include{titlepages/acronyms}
 
 % -------------------
 % INDEX OF TABLES
@@ -71,8 +107,14 @@
 
 \newpage
 \patchcmd{\bibsetup}{\interlinepenalty=5000}{\interlinepenalty=10000}{}{}
-\addcontentsline{toc}{section}{Bibliography}
-\printbibliography[title={Bibliography}]
+\ifthenelse{\boolean{isWrittenInEnglish}}{
+	\addcontentsline{toc}{section}{Bibliography}
+	\printbibliography[title={Bibliography}]
+}
+{
+	\addcontentsline{toc}{section}{Literaturverzeichnis}
+	\printbibliography[title={Literaturverzeichnis}]
+}
 
 
 % ---------
