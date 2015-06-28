@@ -9,5 +9,5 @@ Special Thanks to Thomas Brüggemann (https://github.com/tomaszbrue) and Peter P
 ## Usage
 
 1. You can [fork](https://github.com/pdiegmann/uzk-msc-is-latex/fork) this repository
-2. Create a https://travis-ci.org/ account and connect your forked repository to it
+2. Create a [rTavis CI](https://travis-ci.org/) account and connect your forked repository to it
 3. Get automated PDF builds from your pushs via Travis 
