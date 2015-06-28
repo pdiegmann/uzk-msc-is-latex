@@ -11,8 +11,8 @@ Special Thanks to [Thomas Brüggemann](https://github.com/tomaszbrue) and [Peter
 1. You can [fork](https://github.com/pdiegmann/uzk-msc-is-latex/fork) this repository
 2. Create a [Travis CI](https://travis-ci.org/) account and connect your forked repository to it
    * this account is free for public repositories
-   * create a [Travis CI](https://travis-ci.com/) account [here](https://travis-ci.com/) for private repositories
-     * pro-tip: apply for a [GitHub Student Developer Pack](https://education.github.com/pack) for free private repositories on [Travis CI](https://travis-ci.com/)
+   * create a Travis CI account [here](https://travis-ci.com/) for private repositories
+     * pro-tip: apply for a [GitHub Student Developer Pack](https://education.github.com/pack) for free private repositories on Travis
 3. Add an environment variable called ```github_api_key``` with a [Personal Access Token](https://github.com/settings/tokens)
 4. Get automated PDF builds from your pushs via Travis
    * builds are executed on every push to keep you informed of possible compile-errors
