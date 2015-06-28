@@ -1,4 +1,5 @@
 sudo: required
+cache: apt
 
 env:
     # default naming-patter: branch-commitid.PDF
