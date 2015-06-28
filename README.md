@@ -1,4 +1,3 @@
-# uzk-msc-is-latex
 UzK-MSc-IS-LaTeX [![Build Status](https://travis-ci.org/pdiegmann/uzk-msc-is-latex.svg?branch=master)](https://travis-ci.org/pdiegmann/uzk-msc-is-latex)
 =========
 
