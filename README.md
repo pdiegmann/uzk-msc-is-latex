@@ -17,3 +17,6 @@ Special Thanks to [Thomas Brüggemann](https://github.com/tomaszbrue) and [Peter
 4. Get automated PDF builds from your pushs via Travis
    * builds are executed on every push to keep you informed of possible compile-errors
    * [releases](https://github.com/pdiegmann/uzk-msc-is-latex/releases) are automatically created if you [tag](https://github.com/pdiegmann/uzk-msc-is-latex/tags) a commit.
+
+
+If you're not interested in updates, you can also directly download this repository as archive.
