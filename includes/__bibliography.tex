@@ -19,7 +19,7 @@
 %% CHANGE LIBRARY FILE HERE
 \addbibresource{example.bib}
 
-\let\cite\textcite
+%\let\cite\textcite
 
 \renewbibmacro*{cite}{%
   %\global\boolfalse{cbx:loccit}%
@@ -39,3 +39,117 @@
 \renewcommand{\bibfootnotewrapper}[1]{\bibsentence#1}
 
 \renewcommand*{\multicitedelim}{\addcomma\space}
+
+% delimiter switching for cite and textcite
+\newcommand{\andasfinalnamedelim}{\addspace\bibstring{and}\addspace}
+\let\commaasfinalnamedelim\finalnamedelim
+\let\oldtextcite\textcite
+
+\newcommand{\switchdelim}[1]{\renewcommand*{\finalnamedelim}{#1}}
+
+% set up the default
+\switchdelim{\commaasfinalnamedelim}
+
+% wrap the textcite command to reversibly switch the delimiter
+\renewcommand{\textcite}[1]{%
+{%
+\switchdelim{\andasfinalnamedelim}%
+\oldtextcite{#1}%
+\switchdelim{\commaasfinalnamedelim}%
+}%
+}
+
+\usepackage{xstring}
+
+\newrobustcmd*{\mkbibpossess}[1]{%
+  \IfEndWith{#1}{s}
+    {'}
+    {\IfEndWith{#1}{sh}
+      {'}
+      {\IfEndWith{#1}{sj}
+        {'}
+        {\IfEndWith{#1}{z}
+          {'}
+          {'s}}}}}
+
+\DeclareNameFormat{labelname:poss}{% Based on labelname from biblatex.def
+  \ifcase\value{uniquename}%
+    \usebibmacro{name:last}{#1}{#3}{#5}{#7}%
+  \or
+    \ifuseprefix
+      {\usebibmacro{name:first-last}{#1}{#4}{#5}{#8}}
+      {\usebibmacro{name:first-last}{#1}{#4}{#6}{#8}}%
+  \or
+    \usebibmacro{name:first-last}{#1}{#3}{#5}{#7}%
+  \fi
+  \usebibmacro{name:andothers}%
+  \ifthenelse{\value{listcount}=\value{liststop}}
+    {\ifmorenames
+      {'s}
+      {\StrRemoveBraces{#1}[\cbxnobraces]%
+        \IfEndWith{\cbxnobraces}{s}
+          {'}
+          {\IfEndWith{\cbxnobraces}{sh}
+            {'}
+            {\IfEndWith{\cbxnobraces}{sj}
+              {'}
+              {\IfEndWith{\cbxnobraces}{z}
+                {'}
+                {'s}}}}}}
+    {}}
+
+\DeclareListFormat{organization:poss}{%
+  \usebibmacro{list:delim}{#1}%
+  #1\isdot
+  \usebibmacro{list:andothers}%
+  \ifthenelse{\value{listcount}=\value{liststop}}
+    {\ifmoreitems
+      {'s}
+      {\StrRemoveBraces{#1}[\cbxnobraces]%
+        \IfEndWith{\cbxnobraces}{s}
+          {'}
+          {\IfEndWith{\cbxnobraces}{sh}
+            {'}
+            {\IfEndWith{\cbxnobraces}{sj}
+              {'}
+              {\IfEndWith{\cbxnobraces}{z}
+                {'}
+                {'s}}}}}}
+    {}}
+
+\DeclareFieldFormat{shorthand:poss}{%
+  #1\mkbibpossess{#1}}
+
+\DeclareFieldFormat{possess}{\mkbibpossess{#1}}
+
+\newbibmacro*{cite:label:poss}{% Based on cite:label from chicago-authordate.cbx
+  \iffieldundef{label}%
+    {\iffieldequalstr{entrysubtype}{magazine}%
+       {\printtext[bibhyperref]{%
+          \printfield[journaltitle]{journaltitle}%
+          \printfield[possess]{journaltitle}}}%
+       {\iffieldequalstr{entrytype}{manual}%
+          {\printtext[bibhyperref]{\printlist{organization}}}%
+          {\printtext[bibhyperref]{%
+             \printfield[citetitle]{labeltitle}%
+             \printfield[possess]{labeltitle}}}}}%
+       {\printtext[bibhyperref]{%
+          \printfield{label}%
+          \printfield[possess]{label}}}}
+
+\newrobustcmd*{\posscitealias}{%
+  \AtNextCite{%
+    \renewbibmacro*{cite:label}{\usebibmacro{cite:label:poss}}%
+    \DeclareNameAlias{labelname}{labelname:poss}%
+    \DeclareListAlias{organization}{organization:poss}%
+    \DeclareFieldAlias{shorthand}{shorthand:poss}}}
+
+\newrobustcmd*{\posscite}{%
+  \posscitealias%
+  \textcite}
+
+\newrobustcmd*{\Posscite}{\bibsentence\posscite}
+
+\newrobustcmd*{\posscites}{%
+  \posscitealias%
+  \textcites}
