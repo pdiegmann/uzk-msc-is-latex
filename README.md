@@ -3,10 +3,12 @@ UzK-MSc-IS-LaTeX [![Build Status](https://travis-ci.org/pdiegmann/uzk-msc-is-lat
 
 LaTeX Template for Papers at the Department of Information Systems at Universität zu Köln. (Non official)
 
-Special Thanks to [Thomas Brüggemann](https://github.com/tomaszbrue) and [Peter Praeder](https://github.com/ppraeder).
+Special Thanks to [Thomas Brüggemann](https://github.com/tomaszbrue) and [Peter Praeder](https://github.com/ppraeder). Also thanks to Daniel König for the great cover.
 
 
 ## Usage
+
+All steps after ```1``` are absolutely optional.
 
 1. You can [fork](https://github.com/pdiegmann/uzk-msc-is-latex/fork) this repository
 2. Create a [Travis CI](https://travis-ci.org/) account and connect your forked repository to it
