@@ -44,6 +44,7 @@
 \newcommand{\andasfinalnamedelim}{\addspace\bibstring{and}\addspace}
 \let\commaasfinalnamedelim\finalnamedelim
 \let\oldtextcite\textcite
+\let\oldciteauthor\citeauthor
 
 \newcommand{\switchdelim}[1]{\renewcommand*{\finalnamedelim}{#1}}
 
@@ -55,6 +56,15 @@
 {%
 \switchdelim{\andasfinalnamedelim}%
 \oldtextcite{#1}%
+\switchdelim{\commaasfinalnamedelim}%
+}%
+}
+
+% wrap the citeauthor command to reversibly switch the delimiter
+\renewcommand{\citeauthor}[1]{%
+{%
+\switchdelim{\andasfinalnamedelim}%
+\oldciteauthor{#1}%
 \switchdelim{\commaasfinalnamedelim}%
 }%
 }
