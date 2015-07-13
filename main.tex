@@ -109,10 +109,12 @@
 \newpage
 \patchcmd{\bibsetup}{\interlinepenalty=5000}{\interlinepenalty=10000}{}{}
 \ifthenelse{\boolean{isWrittenInEnglish}}{
+	\phantomsection
 	\addcontentsline{toc}{section}{Bibliography}
 	\printbibliography[title={Bibliography}]
 }
 {
+	\phantomsection
 	\addcontentsline{toc}{section}{Literaturverzeichnis}
 	\printbibliography[title={Literaturverzeichnis}]
 }
