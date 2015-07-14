@@ -1,17 +1,5 @@
-sudo: false
+sudo: required
 cache: apt
-
-addons:
-    apt:
-        packages:
-            # get basic LaTeX stuff
-            - texlive-latex-recommended 
-            - texlive-latex-extra 
-            - texlive-fonts-recommended 
-            # get basic biblatex stuff
-            - texlive-bibtex-extra biblatex
-            # get chktex to check our LaTeX
-            - chktex
 
 env:
     # default naming-patter: branch-commitid.PDF
@@ -19,12 +7,18 @@ env:
 
 before_install:
     # as somehow no biber package is available for ubuntu 12.04 via apt, let's just download it directly
-    - wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz"
+    - sudo wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz"
     - tar xzf biber-linux_x86_64.tar.gz
 
 install:
     # copy the recently downloaded biber exec
-    - cp biber /usr/bin/biber
+    - sudo cp biber /usr/bin/biber
+    # get basic LaTeX stuff
+    - sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
+    # get basic biblatex stuff
+    - sudo apt-get install texlive-bibtex-extra biblatex
+    # get chktex to check our LaTeX
+    - sudo apt-get install chktex
  
 script:
     # if we have a TAG provided, use this as filename: tag.PDF
