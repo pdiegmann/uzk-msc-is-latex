@@ -1,26 +1,39 @@
-sudo: required
+sudo: false
 cache: apt
 
 env:
     # default naming-patter: branch-commitid.PDF
     - outputfilename="${TRAVIS_BRANCH}-${TRAVIS_COMMIT}"
 
-before_install:
-    # as somehow no biber package is available for ubuntu 12.04 via apt, let's just download it directly
-    - sudo wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz"
-    - tar xzf biber-linux_x86_64.tar.gz
+addons:
+    apt:
+        packages:
+            - texlive-latex-base 
+            - texlive-latex-recommended 
+            - texlive-latex-extra 
+            - texlive-fonts-recommended
+            - texlive-latex3
+            - texlive-bibtex-extra 
+            - biblatex
+            - chktex
+            - biber
 
-install:
-    # copy the recently downloaded biber exec
-    - sudo cp biber /usr/bin/biber
+#install:
     # get basic LaTeX stuff
-    - sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
+    #- sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
     # get LaTeX 3
-    - sudo apt-get install texlive-latex3
+    #- sudo apt-get install texlive-latex3
     # get basic biblatex stuff
-    - sudo apt-get install texlive-bibtex-extra biblatex
+    #- sudo apt-get install texlive-bibtex-extra biblatex
     # get chktex to check our LaTeX
-    - sudo apt-get install chktex
+    #- sudo apt-get install chktex
+
+before_script:
+    # as somehow no biber package is available for ubuntu 12.04 via apt, let's just download it directly
+    - wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz" /tmp/biber.tar.gz
+    - tar xzf /tmp/biber.tar.gz
+    # biber-linux_x86_64.tar.gz
+    - export PATH=$PATH:$PWD
  
 script:
     # if we have a TAG provided, use this as filename: tag.PDF
@@ -33,7 +46,7 @@ script:
 
     # now actually build the PDF
     - pdflatex -jobname=${outputfilename} main.tex
-    - biber ${outputfilename}
+    - ./biber ${outputfilename}
     - pdflatex -jobname=${outputfilename} main.tex
 
 deploy:
