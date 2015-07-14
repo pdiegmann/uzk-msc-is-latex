@@ -24,8 +24,8 @@ install:
     # get chktex to check our LaTeX
     - sudo apt-get install chktex
     # install additional packages
-    - sudo cp l3kernel.tds ~/texmf
-    - sudo cp l3packages.tds ~/texmf
+    - sudo cp -r l3kernel.tds ~/texmf
+    - sudo cp -r l3packages.tds ~/texmf
  
 script:
     # if we have a TAG provided, use this as filename: tag.PDF
