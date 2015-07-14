@@ -14,9 +14,8 @@ addons:
             - texlive-fonts-recommended
             - texlive-latex3
             - texlive-bibtex-extra 
-            - biblatex
-            - chktex
-            - biber
+            #- biblatex
+            #- chktex
 
 #install:
     # get basic LaTeX stuff
@@ -39,14 +38,12 @@ script:
     # if we have a TAG provided, use this as filename: tag.PDF
     - "echo ${#TRAVIS_TAG}; if [ ${#TRAVIS_TAG} -gt 0 ]; then outputfilename=${TRAVIS_TAG}; fi"
 
-    - chktex -W # Print version information.
-    - chktex -q -n 6 *.tex chapters.*.tex 2>/dev/null | tee lint.out
-    # If lint output is non-empty report an error.
-    #- test ! -s lint.out
+    #- chktex -W # Print version information.
+    #- chktex -q -n 6 *.tex chapters.*.tex 2>/dev/null | tee lint.out
 
     # now actually build the PDF
     - pdflatex -jobname=${outputfilename} main.tex
-    - ./biber ${outputfilename}
+    - biber ${outputfilename}
     - pdflatex -jobname=${outputfilename} main.tex
 
 deploy:
