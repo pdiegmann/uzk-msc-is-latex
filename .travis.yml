@@ -9,19 +9,19 @@ before_install:
     # as somehow no biber package is available for ubuntu 12.04 via apt, let's just download it directly
     - sudo wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz"
     - tar xzf biber-linux_x86_64.tar.gz
+    - sudo wget "http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz"
+    - tar xzf install-tl-unx.tar.gz
 
 install:
-    # update apt
-    - sudo apt-get clean --yes && sudo apt-get update --yes
-    - sudo apt-get install --fix-missing --yes
     # copy the recently downloaded biber exec
     - sudo cp biber /usr/bin/biber
     # get basic LaTeX stuff
-    - sudo apt-get install texlive-full --fix-missing --yes
+    - sudo ./install-tl
+    #- sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
     # get basic biblatex stuff
-    - sudo apt-get install texlive-bibtex-extra biblatex --yes
+    #- sudo apt-get install texlive-bibtex-extra biblatex
     # get chktex to check our LaTeX
-    - sudo apt-get install chktex --yes
+    - sudo apt-get install chktex
     # install additional packages
     - sudo tlmgr init-usertree
     - sudo tlmgr install l3kernel
