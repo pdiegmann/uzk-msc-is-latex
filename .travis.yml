@@ -9,27 +9,18 @@ before_install:
     # as somehow no biber package is available for ubuntu 12.04 via apt, let's just download it directly
     - sudo wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz"
     - tar xzf biber-linux_x86_64.tar.gz
-    - wget "https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu" && chmod +x ./install-tl-ubuntu
-    #- sudo wget "http://mirrors.ctan.org/install/macros/latex/contrib/l3kernel.tds.zip"
-    #- unzip l3kernel.tds.zip -d l3kernel.tds
-    #- sudo wget "http://mirrors.ctan.org/install/macros/latex/contrib/l3packages.tds.zip"
-    #- unzip l3packages.tds.zip -d l3packages.tds
 
 install:
     # copy the recently downloaded biber exec
     - sudo cp biber /usr/bin/biber
     # get basic LaTeX stuff
-    #- sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
+    - sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
+    # get LaTeX 3
+    - sudo apt-get install texlive-latex3
     # get basic biblatex stuff
-    #- sudo apt-get install texlive-bibtex-extra biblatex
-    - sudo ./install-tl-ubuntu
+    - sudo apt-get install texlive-bibtex-extra biblatex
     # get chktex to check our LaTeX
     - sudo apt-get install chktex
-    # install additional packages
-    #- sudo mkdir /usr/local/share/texmf/tex/latex/l3kernel
-    #- sudo cp -r l3kernel.tds /usr/local/share/texmf/tex/latex/l3kernel
-    #- sudo mkdir /usr/local/share/texmf/tex/latex/l3packages
-    #- sudo cp -r l3packages.tds /usr/local/share/texmf/tex/latex/l3packages
  
 script:
     # if we have a TAG provided, use this as filename: tag.PDF
