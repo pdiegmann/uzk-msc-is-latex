@@ -22,9 +22,9 @@ before_install:
     - wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz"
     - tar xzf biber-linux_x86_64.tar.gz
 
-#install:
+install:
     # copy the recently downloaded biber exec
-#    - cp biber /usr/bin/biber
+    - cp biber /usr/bin/biber
  
 script:
     # if we have a TAG provided, use this as filename: tag.PDF
@@ -37,7 +37,7 @@ script:
 
     # now actually build the PDF
     - pdflatex -jobname=${outputfilename} main.tex
-    - ./biber ${outputfilename}
+    - biber ${outputfilename}
     - pdflatex -jobname=${outputfilename} main.tex
 
 deploy:
