@@ -24,10 +24,10 @@ install:
     # get chktex to check our LaTeX
     - sudo apt-get install chktex
     # install additional packages
-    - sudo mkdir ~/texmf/l3kernel
-    - sudo cp -r l3kernel.tds ~/texmf/l3kernel
-    - sudo mkdir ~/texmf/l3packages
-    - sudo cp -r l3packages.tds ~/texmf/l3packages
+    - sudo mkdir /usr/local/share/texmf/tex/latex/l3kernel
+    - sudo cp -r l3kernel.tds /usr/local/share/texmf/tex/latex/l3kernel
+    - sudo mkdir /usr/local/share/texmf/tex/latex/l3packages
+    - sudo cp -r l3packages.tds /usr/local/share/texmf/tex/latex/l3packages
  
 script:
     # if we have a TAG provided, use this as filename: tag.PDF
