@@ -11,6 +11,9 @@ before_install:
     - tar xzf biber-linux_x86_64.tar.gz
 
 install:
+    # update apt
+    - sudo apt-get clean && sudo apt-get update
+    - sudo apt-get install --fix-missing
     # copy the recently downloaded biber exec
     - sudo cp biber /usr/bin/biber
     # get basic LaTeX stuff
