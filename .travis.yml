@@ -14,12 +14,13 @@ install:
     # copy the recently downloaded biber exec
     - sudo cp biber /usr/bin/biber
     # get basic LaTeX stuff
-    - sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
+    - sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
     # get basic biblatex stuff
     - sudo apt-get install texlive-bibtex-extra biblatex
     # get chktex to check our LaTeX
     - sudo apt-get install chktex
     # install additional packages
+    - sudo tlmgr init-usertree
     - sudo tlmgr install l3kernel
     - sudo tlmgr install l3packages
  
