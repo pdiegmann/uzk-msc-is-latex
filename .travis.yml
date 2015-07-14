@@ -9,23 +9,21 @@ before_install:
     # as somehow no biber package is available for ubuntu 12.04 via apt, let's just download it directly
     - sudo wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz"
     - tar xzf biber-linux_x86_64.tar.gz
-    - sudo wget "http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz"
-    - tar xzf install-tl-unx.tar.gz
+    - sudo wget "http://mirrors.ctan.org/install/macros/latex/contrib/l3kernel.tds.zip"
+    - sudo wget "http://mirrors.ctan.org/install/macros/latex/contrib/l3packages.tds.zip"
 
 install:
     # copy the recently downloaded biber exec
     - sudo cp biber /usr/bin/biber
     # get basic LaTeX stuff
-    - sudo install-tl-*/install-tl
-    #- sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
+    - sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
     # get basic biblatex stuff
-    #- sudo apt-get install texlive-bibtex-extra biblatex
+    - sudo apt-get install texlive-bibtex-extra biblatex
     # get chktex to check our LaTeX
     - sudo apt-get install chktex
     # install additional packages
-    - sudo tlmgr init-usertree
-    - sudo tlmgr install l3kernel
-    - sudo tlmgr install l3packages
+    - sudo cp l3kernel.tds ~/texmf
+    - sudo cp l3packages.tds ~/texmf
  
 script:
     # if we have a TAG provided, use this as filename: tag.PDF
