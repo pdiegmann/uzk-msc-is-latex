@@ -178,7 +178,7 @@
 	\adddotifneeded}
 }
   
-\usepackage{xparse}
+\usepackage{l3packages/xparse/xparse}
 
 \newcommand{\citewithoptionalparams}[3]{\ifthenelse{\equal{#2}{}}{\ifthenelse{\equal{#1}{}}{\cite{#3}}{\cite[#1]{#3}}}{\cite[#1][#2]{#3}}}
 
