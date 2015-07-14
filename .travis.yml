@@ -19,6 +19,9 @@ install:
     - sudo apt-get install texlive-bibtex-extra biblatex
     # get chktex to check our LaTeX
     - sudo apt-get install chktex
+    # install additional packages
+    - sudo tlmgr install l3kernel
+    - sudo tlmgr install l3packages
  
 script:
     # if we have a TAG provided, use this as filename: tag.PDF
