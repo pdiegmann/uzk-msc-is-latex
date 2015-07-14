@@ -182,6 +182,13 @@
 
 \newcommand{\citewithoptionalparams}[3]{\ifthenelse{\equal{#2}{}}{\ifthenelse{\equal{#1}{}}{\cite{#3}}{\cite[#1]{#3}}}{\cite[#1][#2]{#3}}}
 
-\DeclareDocumentCommand{\citeby}{ O{} O{} m O{} O{} m }{\footnote{\citewithoptionalparams{#1}{#2}{#3} as cited by \citewithoptionalparams{#4}{#5}{#6}}}
+\ifthenelse{\boolean{isWrittenInEnglish}}{
+	\newcommand{\ascitedby}{as cited by\xspace}
+}
+{
+	\newcommand{\ascitedby}{zitiert nach\xspace}
+}
+
+\DeclareDocumentCommand{\citeby}{ O{} O{} m O{} O{} m }{\footnote{\citewithoptionalparams{#1}{#2}{#3} \ascitedby \citewithoptionalparams{#4}{#5}{#6}}}
 
 \let\citedby\citeby
