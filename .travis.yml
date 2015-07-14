@@ -1,48 +1,39 @@
-sudo: false
+sudo: required
 cache: apt
 
 env:
     # default naming-patter: branch-commitid.PDF
     - outputfilename="${TRAVIS_BRANCH}-${TRAVIS_COMMIT}"
 
-addons:
-    apt:
-        packages:
-            - texlive-latex-base 
-            - texlive-latex-recommended 
-            - texlive-latex-extra 
-            - texlive-fonts-recommended
-            - texlive-latex3
-            - texlive-bibtex-extra 
-            - biblatex
-            #- chktex
-
-#install:
-    # get basic LaTeX stuff
-    #- sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
-    # get LaTeX 3
-    #- sudo apt-get install texlive-latex3
-    # get basic biblatex stuff
-    #- sudo apt-get install texlive-bibtex-extra biblatex
-    # get chktex to check our LaTeX
-    #- sudo apt-get install chktex
-
-before_script:
+before_install:
     # as somehow no biber package is available for ubuntu 12.04 via apt, let's just download it directly
-    - wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz"
+    - sudo wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz"
     - tar xzf biber-linux_x86_64.tar.gz
-    - export PATH=$PATH:$PWD
+
+install:
+    # copy the recently downloaded biber exec
+    - sudo cp biber /usr/bin/biber
+    # get basic LaTeX stuff
+    - sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
+    # get LaTeX 3
+    - sudo apt-get install texlive-latex3
+    # get basic biblatex stuff
+    - sudo apt-get install texlive-bibtex-extra biblatex
+    # get chktex to check our LaTeX
+    - sudo apt-get install chktex
  
 script:
     # if we have a TAG provided, use this as filename: tag.PDF
     - "echo ${#TRAVIS_TAG}; if [ ${#TRAVIS_TAG} -gt 0 ]; then outputfilename=${TRAVIS_TAG}; fi"
 
-    #- chktex -W # Print version information.
-    #- chktex -q -n 6 *.tex chapters.*.tex 2>/dev/null | tee lint.out
+    - chktex -W # Print version information.
+    - chktex -q -n 6 *.tex chapters.*.tex 2>/dev/null | tee lint.out
+    # If lint output is non-empty report an error.
+    #- test ! -s lint.out
 
     # now actually build the PDF
     - pdflatex -jobname=${outputfilename} main.tex
-    - ./biber ${outputfilename}
+    - biber ${outputfilename}
     - pdflatex -jobname=${outputfilename} main.tex
 
 deploy:
