@@ -1,0 +1,55 @@
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{filecontents}
+
+\makeatletter
+\pgfplotsset{
+    /pgfplots/flexible xticklabels from table/.code n args={3}{%
+        \pgfplotstableread[#3]{#1}\coordinate@table
+        \pgfplotstablegetcolumn{#2}\of{\coordinate@table}\to\pgfplots@xticklabels
+        \let\pgfplots@xticklabel=\pgfplots@user@ticklabel@list@x
+    }
+}
+\makeatother
+
+\definecolor{barcolor}{RGB}{64, 64, 64}
+
+\DeclareDocumentCommand{\printcsvchart}{ O{} O{} m }{
+
+\begin{tikzpicture}
+	\begin{axis}[
+		axis x line*=bottom,
+	    axis y line*=left,
+		width = \linewidth,
+		height = 0.66\linewidth,
+		bar width=0.75cm,
+		ybar, ymin=0,
+		xlabel=#2,
+		ylabel=#1,
+		point meta=y,
+		visualization depends on=y \as \rawy,
+		every node near coord/.append style={
+	    	font=\small,
+        	color=white,
+    	    shift={(axis direction cs:0,-\rawy)}
+	    },
+	    x label style={
+	    	at={(axis description cs:0.5,-0.03)},
+	    	anchor=north
+	    },
+	    y label style={
+	    	at={(axis description cs:0.03,0.5)},
+	    	anchor=south
+	    },
+		flexible xticklabels from table={#3}{Zeilenbeschriftungen}{col sep=semicolon},
+		xticklabel style={text height=1.5ex}, % To make sure the text labels are nicely aligned
+		xtick=data,
+		nodes near coords,
+		nodes near coords align={vertical}
+	]
+	\addplot[fill=barcolor] table[x expr=\coordindex,y=Gesamtergebnis, col sep=semicolon]{#3};
+
+	\end{axis}
+
+\end{tikzpicture}
+}
