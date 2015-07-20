@@ -24,12 +24,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\PassOptionsToPackage{dvipsnames,usenames}{color}
+
 %% META-DATA FOR PDF
 \PassOptionsToPackage{hyphens}{url}\usepackage[
-	pdftitle={}, % Document-Title
-	pdfsubject={}, % Subject
-	pdfauthor={}, % Author(s)
-	pdfkeywords={}, % Keywords
+	pdftitle={Master Thesis: A Quantitative Field Study on Information System Projects and the Moderating Role of Communication in Expectation-Confirmation Theory}, % Document-Title
+	pdfsubject={Master Thesis, Phil Diegmann, 2015}, % Subject
+	pdfauthor={Phil Diegmann}, % Author(s)
+	pdfkeywords={Master, Thesis, Master Thesis, M.Sc., M. Sc., Information Systems, IS, Wirtschaftsinformatik, University, Universität, Köln, Universität zu Köln, University of Cologne, Expectation-Confirmation Theory, ECT, Communication, Quantative, Field Study, Success, Expectation}, % Keywords
 	colorlinks=false,
 	breaklinks=true
 ]{hyperref}
@@ -62,6 +64,12 @@
 \input{includes/__styles}
 \input{includes/__plots}
 \input{includes/__bibliography}
+
+\newcommand{\todo}[1]{\textbf{\textsc{\textcolor{Red}{TODO: #1}}}}
+\newcommand{\TODO}[1]{\todo{#1}}
+\newcommand{\note}[1]{\textbf{\textsc{\textcolor{Cyan}{NOTE: #1}}}}
+\newcommand{\NOTE}[1]{\note{#1}}
+
 
 %\makeatletter%
 %\long\def\@makefntext#1{%

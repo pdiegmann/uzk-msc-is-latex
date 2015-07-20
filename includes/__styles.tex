@@ -6,13 +6,15 @@
     right=1cm
 ]{geometry} 
 
+\usepackage{afterpage}
+
 %% LINEHEIGHT
 \renewcommand{\arraystretch}{1.5}
 
 % PAGE NUMBERING ON TOP
 \usepackage{scrpage2} 
-\usepackage[dvipsnames,usenames]{color}
 \clearscrheadfoot 
+\usepackage{color}
 \chead[\pagemark]{\textcolor[gray]{0.5}{\pagemark}} 
 \pagestyle{scrheadings}
 
@@ -103,6 +105,13 @@
 {\titlerule*[1mm]{.}\contentspage}
 
 \titlecontents{table}       % set formatting for \subsection 
+[3.4em]                     % adjust left margin
+{\vspace{0.5em}}            % font formatting
+{:\hspace*{0.9em}\contentslabel{4.5em}}     % sec label and offset
+{\hspace*{-2.3em}}
+{\titlerule*[1mm]{.}\contentspage}
+
+\titlecontents{longtable}       % set formatting for \subsection 
 [3.4em]                     % adjust left margin
 {\vspace{0.5em}}            % font formatting
 {:\hspace*{0.9em}\contentslabel{4.5em}}     % sec label and offset
