@@ -7,18 +7,21 @@ env:
 
 before_install:
     # as somehow no biber package is available for ubuntu 12.04 via apt, let's just download it directly
-    - sudo wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz"
+    #- sudo wget "http://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/0.9.9/binaries/Linux/biber-linux_x86_64.tar.gz"
+    - sudo wget "https://phildiegmann.s3.amazonaws.com/downloads/biber/0.9.9/biber-linux_x86_64.tar.gz"
     - tar xzf biber-linux_x86_64.tar.gz
+    # add latest latex packages to apt-get repos
+    - sudo add-apt-repository ppa:texlive-backports/ppa -y
 
 install:
-    # copy the recently downloaded biber exec
-    - sudo cp biber /usr/bin/biber
+    # update apt-get to get newest versions
+    - sudo apt-get update
     # get basic LaTeX stuff
-    - sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
+    - sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-pictures
     # get LaTeX 3
     - sudo apt-get install texlive-latex3
     # get basic biblatex stuff
-    - sudo apt-get install texlive-bibtex-extra biblatex
+    - sudo apt-get install texlive-bibtex-extra biblatex 
     # get chktex to check our LaTeX
     - sudo apt-get install chktex
  
@@ -33,7 +36,7 @@ script:
 
     # now actually build the PDF
     - pdflatex -jobname=${outputfilename} main.tex
-    - biber ${outputfilename}
+    - ./biber ${outputfilename}
     - pdflatex -jobname=${outputfilename} main.tex
 
 deploy:
