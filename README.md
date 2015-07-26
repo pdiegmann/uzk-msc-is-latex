@@ -3,7 +3,7 @@ UzK-MSc-IS-LaTeX [![Build Status](https://travis-ci.org/pdiegmann/uzk-msc-is-lat
 
 LaTeX Template for Papers at the Department of Information Systems at Universität zu Köln. (Non official)
 
-Special Thanks to [Thomas Brüggemann](https://github.com/tomaszbrue) and [Peter Praeder](https://github.com/ppraeder). Also thanks to Daniel König for the great cover.
+Special Thanks to [Thomas Brüggemann](https://github.com/thomasbrueggemann) and [Peter Praeder](https://github.com/ppraeder). Also thanks to Daniel König for the great cover.
 
 
 ## Usage
